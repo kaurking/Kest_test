@@ -1,149 +1,150 @@
-# User Promptide Kokkuvote
+# User Promptid Sona-Sonalt
 
-See fail koondab senised kasutaja kysimused ja soovid kronoloogilises jarjekorras.
+## 1
 
-## 1. Algne backend'i idee
+```text
+Mul vaja ehitada kindlustussüsteem, mis annab kasutajle numbrimärgi põhjal autole kindlustuspakkumise. Tegemist on lihtsa praegu lihtsa süsteemiga. Praegu oleks vaja süsteemi, mis vastab sellele kirjeldusele:
+> "*Kasutajana tahan sisestada oma sõiduki registrinumbri ja näha liikluskindlustuse pakkumistest (vähemalt 3tk) kõige odavamat, et saaksin kiiresti teada, milline kindlustus mulle kõige vähem maksab.*"
 
-Kasutaja soovis ehitada kindlustussusteemi, kus kasutaja sisestab soiduki
-registrinumbri ja naeb mock-pakkumiste seast odavaimat liikluskindlustuse
-(MTPL) pakkumist. Andmed pidid tulema kaasasolevast `offers.json` failist.
+**Ülesanne.** Ehita lihtne mini-funktsionaalsus: kasutaja sisestab registrinumbri ja näeb mock-pakkumiste seast kõige odavamat liikluskindlustuse (MTPL) pakkumist.
 
-Kusimus: milline oleks padev backend sellisele ulesandele?
+**Andmed.** Pakkumised tulevad kaasasolevast `offers.json` failist.
 
-## 2. Uldise plaani soov
-
-Kasutaja palus kirjeldada praegu uldist plaani.
-
-## 3. Pariselt edasiarendatav loogika
-
-Kasutaja kysisi, milline oleks paris loogika, mida saaks hiljem lihtsalt edasi
-arendada paris susteemiks.
-
-## 4. Python sobivus
-
-Kasutaja kysisi, kui viable oleks sama asja Pythonis teha.
-
-## 5. Susteemi alustamine Pythonis
-
-Kasutaja lubas alustada susteemi ehitamist Python/FastAPI kujul ning palus
-arvestada, et hiljem lisandub testimise jaoks UI.
-
-## 6. Numbrimargi testimine
-
-Kasutaja kysisi, kuidas praegu kontroll kaib ja kuidas saab numbrimarki testida.
-
-## 7. Auto nime pohine otsing
-
-Kasutaja pakkus vahepeal, et numbrimargi asemel voiks otsida auto nime järgi
-ning kliendile tuleks anda alati vahemalt 3 odavaimat pakkujat, kuid kuvada
-koik pakkumised odavaimast kallimani.
-
-Hiljem kasutaja tapsustas, et see oli eksitus ja auto nime pohist otsingut ei
-ole vaja.
-
-## 8. Testandmete plokid testides
-
-Kasutaja kysisi, mis on `test_quote_service.py` failis `service` muutujasse
-salvestatud pakkumiste plokid, kas need on vajalikud ja kas 10 000 realine JSON
-tekitaks probleemi.
-
-## 9. API too selgitus
-
-Kasutaja palus tapselt selgitada, kuidas API praegu tootab.
-
-## 10. Veebilehe lisamine
-
-Kasutaja tapsustas, et auto nime pohist otsingut ei ole vaja. Ta kysisi, kas
-Swagger UI on midagi, mida kasutatakse, ja soovis tavalist lihtsat veebilehte:
-
-- uleval MTPL kindlustuse dropdown
-- numbrimargi otsing
-- pakkumised odavaimast kallimani
-- kui numbrit ei leita, kuvada otsingukoha juures tekst, et sellist autot ei
-  leitud
-- neutraalne hele basic template
-- ilma logode ja piltideta
-- all kontaktiosa
-
-## 11. JSON database flow
-
-Kasutaja kysisi, kas kui service jookseb arvutis ja veebileht on uleval, siis
-susteem votab info `offers.json` "JSON database'ist" ja valjastab selle
-kasutajale ning kas see flow on praegu tootav.
-
-## 12. Korralikum kaivitamine ja sulgemine
-
-Kasutaja soovis muuta susteemi kaivitamise korralikumaks, sest backendi
-sulgemine oli segane.
-
-## 13. Taustal kaivitamise mote
-
-Kasutaja kysisi, mis on serveri taustal kaivitamise mote ehk miks kasutada
-`start` kasu `dev` asemel.
-
-## 14. Susteemi hostimine, database ja turvalisus
-
-Kasutaja kysisi taustakysimusi:
-
-- kuidas selline susteem uldiselt jooksma peaks ja mis masina peal
-- kuidas lisada database
-- kas praegune susteem on kübertuvalisuse ja andmekaitse poolelt aarimselt
-  ebaturvaline
-
-## 15. Database lisamise detailid ja skaleerimine
-
-Kasutaja kysisi, kas praegune logging on piisav, kas database lisamisel tuleks
-seda uuendada, kuidas database lisamine tootaks praeguse setupiga ja kuidas
-seda hiljem skaleerida. Samuti huvitas, kus tulevikus suurem database jookseks.
-
-## 16. SQLite database integreerimine
-
-Kasutaja palus integreerida SQLite database'i.
-
-Tapsustused:
-
-- uued autod lahevad uldiselt otse database'i
-- lisada voib ka JSON import skripti
-- kasutaja kysisi, kas `DatabaseOfferProvider` on see kiht, mis saadab tagasi
-  kasutajale naidatavad andmed
-- kasutaja mainis, et ta pole varem VS Code'is database'i lisanud
-- kasutaja pole SQLite'i alla laadinud
-- loggingut ei ole vaja kohe teha, aga sellega voib jargmise sammuna arvestada
-
-## 17. Portide probleem
-
-Kasutaja margas, et port `8000` on kasutusel, aga serverit ei saa sulgeda.
-`scripts/server status` ytles, et server ei jookse, kuid URL avanes ja
-`123ABC` otsing tootis tulemust.
-
-Kasutaja kysisi, mis toimub.
-
-## 18. Loggingu sisu
-
-Kasutaja kysisi, mida oleks selles susteemis vaja logida ning kas logida lihtsalt
-SQL `SELECT` kaske.
-
-## 19. Loggingu lisamine
-
-Kasutaja kinnitas, et ta motleski sellist loggingut, ja palus selle ara teha.
-
-## 20. API endpointide lihtsustamine
-
-Kasutaja margas, et API endpoint'e on kaks, ja palus jatta alles ainult
-`/api/mtpl/offers`.
-
-## 21. Provider'i funktsiooni tapsustus
-
-Kasutaja kysisi `quote_service.py` rea kohta:
-
-```python
-raw_offers = self.offer_provider.get_offers_for_registration(normalized_registration)
+algne süsteem preagu võiks olla selline, et kasutab seda algset andmefaili. Milline oleks pädev backend sellisele ülesandele?
 ```
 
-Kasutaja ei nainud, kus funktsioon on defineeritud, ja kysisi, kas database
-overwrite'is selle sisuliselt ara.
+## 2
 
-## 22. Promptide kokkuvote faili
+```text
+kirjelda praegu üldist plaani palun
+```
 
-Kasutaja palus kokku votta koik senised promptid ja lisada need Markdown failina
-kausta.
+## 3
+
+```text
+Milline oleks päris loogika, mida saaks hiljem lihtsalt edasi arendada päris süsteemiks
+```
+
+## 4
+
+```text
+kui viable on sama asja pythonis teha?
+```
+
+## 5
+
+```text
+Võib selliselt alustada süsteemi ehitamist, aga arvesta, et hiljem lisan ka Testimise mõttes UI süsteemile.
+```
+
+## 6
+
+```text
+kuidas preagu kontroll käib, kuidas saan testida numbrimärk?
+```
+
+## 7
+
+```text
+Preagu on hard-coded sisse need autoinfod koos kindlustusega. Teeme hetkel nii, et saab auto nime järgi leida ja siis ta otsib JSON failist seda pakkumist. Ja lisaks tuleb kliendile anda alati vähemalt 3 odavaimat pakkujat, võiks teha nii, et saab järjestada lihtsalt nii, et odavaimad on eespool, aga näidatakse kõiki.
+```
+
+## 8
+
+```text
+mis on failis test_quote_service.py service muutujasse saalvestatud plokid, kas need on seal vajalikud? Kui meie JSON fail oleks 10 000 rida, siis see tekitaks probleemi?
+```
+
+## 9
+
+```text
+Selgita täpsemalt, kuidas see APi praegu töötab
+```
+
+## 10
+
+```text
+Ärme tee auto nime põhiselt, kirjutasin valesti enne. Kas Swagger UI on midagi ,mida kasutatakse? Tegelikult Võiks veebilehe normaalsele kujule teha. Teeks lihtsa dropdowni, kus on MTPL kindlustus ja seellel on funktsioon kus saab otsida numbrimärki ja siis näha pakkumisi alustades odavaimast. Kui numbrit ei oel siis pane otsingukoha juurde tekst, et sellist autot ei leitud. Veebileht võib olla preagu ilma igasuguste logode ja piltidetta, lihtsalt color code neutraalne, hele. Lihtslat basic template, kus üleval dropdown ja all kontakt jne. Võid võtta inspiratsiooni mõne eesti kindlustusfirma lehest, nt kindlustusest. 
+```
+
+## 11
+
+```text
+Huvi pärast küsin, kui mul praegu service jookseb arvutis ja ma paneb veebilehe ülesse, kas siis teoorias ta võtab mu "JSON datbasist" kogu info ja siis väljastab selle kasutajale? Kas see flow on praegu töötav?
+```
+
+## 12
+
+```text
+Teeks süsteemi käivitmise korralikumaks. Hetkel on backendi sulgemine ka segane, kuidas saaks paremaks seda teha?
+```
+
+## 13
+
+```text
+Küsin veidi tasutaküsimusi, kuna olen võhik süsteemi algstaadiumi osadega. 
+Kuidas üldiselt selline süsteem jooksma peaks, mis masina peal?
+Kuidas saaks eelneva küsimuse põhjal lisada database'i süsteemile?
+Kas süsteem on preagu äärmiselt ebaturvaline küberturvalisuse ja andmekaitse poolte pealt?
+```
+
+## 14
+
+```text
+kui preagune logging on piisav, siis databse lisamisel tuleb ka seda uuendada? Selgita kuidas töötaks database lisamine hetkel minu setupiga ja kuidas saaks seda hiljem skaleerida, kus jookseb tulevikus suurem database?
+```
+
+## 15
+
+```text
+Jah integreeri sql lite database. Üldiselt uued autod lähevad otse database'i, aga võid teha ka json import skripti. DatabaseOfferProvider on see, mis saadetekase tagasi, mida näidatakse kasutajale eks? Ma pole Visual studi COde'i lisanud databse'i varem. Samuti pole ma laadinud alla sql lite'i. Ära loggingut kohe tee, aga võid arvetada, et see on järgmine samm.
+```
+
+## 16
+
+```text
+There seems to be a problem with the ports. 8000 in in use but i cant close it, im assuming its my server but status says server is not open. But when i open the url and search for 123abc then it works, whats up with that?
+```
+
+## 17
+
+```text
+mis on serveri taustal käivitamse mõte, ehk teha dev asemel start?
+```
+
+## 18
+
+```text
+okei saan aru. Teeme logid ka paremaks, mis oleksid vajalikud selles süsteemis logidesse? lihtsalt read (select) käsud?
+```
+
+## 19
+
+```text
+ma tegelt midagi sellest mõtlesingi, tee see ka ära
+```
+
+## 20
+
+```text
+right now there are 2 API endpoints. I dont think we need both, lets keep the offers one?
+```
+
+## 21
+
+```text
+in quote_service raw_offers = self.offer_provider.get_offers_for_registration(normalized_registration):
+the function there is not defined. did the database overwrite this basically?
+```
+
+## 22
+
+```text
+Palun võta kokku kõik minu promptid, mis ma küsisin ja pane .md faili ja lisa siia kausta.
+```
+
+## 23
+
+```text
+Tee seda nüüd uuesti ja pane sõna sõnalt täpselt samamoodi kirja kuidas ma kirjutasin
+```

@@ -2,8 +2,6 @@ __pycache__/
 *.py[cod]
 .venv/
 .run/
-data/*.db
-data/*.db-*
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
