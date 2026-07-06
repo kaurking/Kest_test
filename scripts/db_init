@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR))
+
+from app.database import DATABASE_URL, connect, create_schema, get_database_path
+
+
+def main() -> None:
+    with connect() as connection:
+        create_schema(connection)
+
+    print(f"Database ready: {get_database_path(DATABASE_URL)}")
+
+
+if __name__ == "__main__":
+    main()

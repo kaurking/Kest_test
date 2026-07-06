@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liikluskindlustuse pakkumised</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">Kindlustusvõrdlus</a>
+        <nav class="nav-links" aria-label="Põhinavigatsioon">
+          <a href="#offers">Pakkumised</a>
+          <a href="#contact">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="search-section">
+        <div class="container search-layout">
+          <div>
+            <p class="eyebrow">Liikluskindlustus</p>
+            <h1>Leia MTPL pakkumised numbrimärgi järgi</h1>
+            <p class="lead">
+              Sisesta sõiduki registrinumber ja näita pakkumisi odavaimast kallimani.
+            </p>
+          </div>
+
+          <form id="quote-form" class="quote-form">
+            <label for="insurance-type">Kindlustuse tüüp</label>
+            <select id="insurance-type" name="insurance-type">
+              <option value="mtpl">MTPL liikluskindlustus</option>
+            </select>
+
+            <label for="registration-number">Numbrimärk</label>
+            <div class="search-row">
+              <input
+                id="registration-number"
+                name="registration-number"
+                type="text"
+                placeholder="123ABC"
+                autocomplete="off"
+              />
+              <button type="submit">Otsi</button>
+            </div>
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="offers" class="offers-section">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Tulemused</p>
+              <h2 id="results-title">Pakkumised ilmuvad siia</h2>
+            </div>
+            <p id="results-meta" class="results-meta"></p>
+          </div>
+
+          <div id="offers-list" class="offers-list">
+            <div class="empty-state">
+              Proovi näiteks numbrimärki <strong>123ABC</strong> või <strong>456DEF</strong>.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>Kindlustusvõrdlus</strong>
+          <p>Lihtne testvaade MTPL pakkumiste võrdlemiseks.</p>
+        </div>
+        <div>
+          <strong>Kontakt</strong>
+          <p>info@example.test</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

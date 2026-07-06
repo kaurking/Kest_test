@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+import argparse
+import json
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR))
+
+from app.database import DATABASE_URL, connect, create_schema, get_database_path
+
+
+def load_offers(offers_file: Path) -> list[dict]:
+    with offers_file.open(encoding="utf-8") as file:
+        return json.load(file)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Import offers.json into SQLite")
+    parser.add_argument(
+        "--source",
+        default=str(BASE_DIR / "offers.json"),
+        help="Path to JSON offers file",
+    )
+    parser.add_argument(
+        "--replace",
+        action="store_true",
+        help="Delete existing offers before importing",
+    )
+    args = parser.parse_args()
+
+    offers = load_offers(Path(args.source))
+
+    with connect() as connection:
+        create_schema(connection)
+        if args.replace:
+            connection.execute("DELETE FROM offers")
+
+        connection.executemany(
+            """
+            INSERT INTO offers
+                (reg, insurer, product, premium, period, currency, status, error)
+            VALUES
+                (:reg, :insurer, :product, :premium, :period, :currency, :status, :error)
+            """,
+            [
+                {
+                    "reg": offer.get("reg"),
+                    "insurer": offer.get("insurer"),
+                    "product": offer.get("product"),
+                    "premium": offer.get("premium"),
+                    "period": offer.get("period"),
+                    "currency": offer.get("currency"),
+                    "status": offer.get("status"),
+                    "error": offer.get("error"),
+                }
+                for offer in offers
+            ],
+        )
+        connection.commit()
+
+    print(f"Imported {len(offers)} offers into {get_database_path(DATABASE_URL)}")
+
+
+if __name__ == "__main__":
+    main()
